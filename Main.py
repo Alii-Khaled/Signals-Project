@@ -33,22 +33,24 @@ def main():
     # Mode E :
     while 1:
         mode = input(UI)
+        plotnum = 231
         if mode == 'A':
-            fig = plt.figure(figsize=(20, 10))
+            fig1 = plt.figure(figsize=(20, 10))
             outPdf = "Part A.pdf"
             pdf = matplotlib.backends.backend_pdf.PdfPages(outPdf)
             rng = np.arange(-5.0, 5.1, 0.05)
 
             plt.figure(1)
             y1 = A.uStep(rng)
-            plt.subplot(231)
+            plt.subplot(plotnum)
             plt.ylabel('X(t)')
             plt.xlabel('t')
             plt.title("Unit Step: U(t)")
             plt.xticks(np.arange(min(rng), max(rng), 1.0))
             plt.plot(rng, y1)
 
-            plt.subplot(232)
+            plotnum += 1
+            plt.subplot(plotnum)
             y2 = A.triangle(rng)
             plt.ylabel('X(t)')
             plt.xlabel('t')
@@ -56,7 +58,8 @@ def main():
             plt.xticks(np.arange(min(rng), max(rng), 1.0))
             plt.plot(rng, y2)
 
-            plt.subplot(233)
+            plotnum += 1
+            plt.subplot(plotnum)
             y3 = A.rect(rng)
             plt.ylabel('X(t)')
             plt.xlabel('t')
@@ -64,7 +67,8 @@ def main():
             plt.xticks(np.arange(min(rng), max(rng), 1.0))
             plt.plot(rng, y3)
 
-            plt.subplot(234)
+            plotnum += 1
+            plt.subplot(plotnum)
             y4 = A.rTriangle(rng)
             plt.ylabel('X(t)')
             plt.xlabel('t')
@@ -72,7 +76,8 @@ def main():
             plt.xticks(np.arange(min(rng), max(rng), 1.0))
             plt.plot(rng, y4)
 
-            plt.subplot(235)
+            plotnum += 1
+            plt.subplot(plotnum)
             rng = np.arange(-4., 3.1, 0.05)
             y5 = A.signal(rng)
             plt.ylabel('X(t)')
@@ -81,24 +86,69 @@ def main():
             plt.xticks(np.arange(min(rng), max(rng), 1.0))
             plt.plot(rng, y5)
 
-            pdf.savefig(fig)
+            pdf.savefig(fig1)
             pdf.close()
+            break
 
         elif mode == 'B':
-            outPdf = "Part B"
+            outPdf = "Part B.pdf"
+            pdf = matplotlib.backends.backend_pdf.PdfPages(outPdf)
             rng = np.arange(-5., 5.1, 0.05)
 
+            fig2 = plt.figure(1, figsize=(20, 10))
+            fig2.suptitle("y(t) = e^(-|t|/5) * [U(t+1) - U(t-3)]", fontsize=16)
+            y = B.y(rng)
+            y1 = B.y1(rng)
+            y2 = B.y2(rng)
+            y3 = B.y3(rng)
+
+            plt.subplot(plotnum)
+            plt.ylabel('y(t)')
+            plt.xlabel('t')
+            plt.title("y(t)")
+            plt.xticks(np.arange(min(rng), max(rng), 1.0))
+            plt.plot(rng, y)
+
+            plotnum += 1
+            plt.subplot(plotnum)
+            plt.ylabel('y1(t)')
+            plt.xlabel('t')
+            plt.title("y1(t) = y(3t)")
+            plt.xticks(np.arange(min(rng), max(rng), 1.0))
+            plt.plot(rng, y1)
+
+            plotnum += 1
+            plt.subplot(plotnum)
+            plt.ylabel('y2(t)')
+            plt.xlabel('t')
+            plt.title('y2(t) = y(t + 2)')
+            plt.xticks(np.arange(min(rng), max(rng), 1.0))
+            plt.plot(rng, y2)
+
+            plotnum += 1
+            plt.subplot(plotnum)
+            plt.ylabel('y3(t)')
+            plt.xlabel('t')
+            plt.title('y3(t) = y(4t - 2)')
+            plt.xticks(np.arange(min(rng), max(rng), 1.0))
+            plt.plot(rng, y3)
+
+            pdf.savefig(fig2)
+            pdf.close()
+            break
 
         elif mode == 'C':
-            outPdf = "Part C"
+            outPdf = "Part C.pdf"
+            pdf = matplotlib.backends.backend_pdf.PdfPages(outPdf)
+            rng = np.arange(-15., 15.1, 0.05)
 
 
         elif mode == 'D':
-            outPdf = "Part D"
+            outPdf = "Part D.pdf"
 
 
         elif mode == 'E':
-            outPdf = "Part E"
+            outPdf = "Part E.pdf"
 
 
         elif mode == 'Q':

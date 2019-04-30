@@ -12,8 +12,8 @@ def triangle(t):
 
 
 def uStep(t):
-
-    y = (t >= 0)
+    # Unit Step Function.
+    y = (t >= 0)*1
     return y
 
 
@@ -24,5 +24,5 @@ def rTriangle(t):
 
 
 def signal(t):
-    X = np.exp(-3*t) * np.sin(8*np.pi/5 * t) * uStep(t + 2)
-    return X
+    x = np.exp(-3*t) * np.sin(8*np.pi/5 * t) * uStep(t + 2)
+    return x
