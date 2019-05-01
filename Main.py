@@ -102,6 +102,7 @@ def main():
             y2 = B.y2(rng)
             y3 = B.y3(rng)
 
+            plotnum = 221
             plt.subplot(plotnum)
             plt.ylabel('y(t)')
             plt.xlabel('t')
@@ -141,7 +142,17 @@ def main():
             outPdf = "Part C.pdf"
             pdf = matplotlib.backends.backend_pdf.PdfPages(outPdf)
             rng = np.arange(-15., 15.1, 0.05)
+            fig3 = plt.figure(1, figsize=(10, 10))
+            plt.title("Z(t) = e^(-|t|/3) * sin(4πt) * [U(t) - U(t-5)]  In Periodic time (T = 6)")
+            plt.xlabel('t')
+            plt.ylabel('Z(t)')
+            plt.xticks(np.arange(min(rng), max(rng), 1.0))
+            z = C.z(rng)
+            plt.plot(rng, z)
 
+            pdf.savefig(fig3)
+            pdf.close()
+            break
 
         elif mode == 'D':
             outPdf = "Part D.pdf"
