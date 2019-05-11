@@ -152,11 +152,13 @@ def main():
 
             pdf.savefig(fig3)
             pdf.close()
+            print("Energy of Z(t) = ", C.EnergyZ())
+            print("Power of Z(t) = ", C.PowerZ())
             break
 
         elif mode == 'D':
             outPdf = "Part D.pdf"
-
+            
 
         elif mode == 'E':
             outPdf = "Part E.pdf"
