@@ -8,7 +8,6 @@ import matplotlib.backends.backend_pdf
 import math
 import numpy as np
 
-
 UI = " ---------------------------------\n" \
      "|Enter ' A ' to get Mode A.       |\n" \
      "|Enter ' B ' to get Mode B.       |\n" \
@@ -158,11 +157,91 @@ def main():
 
         elif mode == 'D':
             outPdf = "Part D.pdf"
-            
+            pdf = matplotlib.backends.backend_pdf.PdfPages(outPdf)
+            rng = np.arange(-15., 15.1, 0.05)
+            fig4 = plt.figure(1, figsize=(20, 10))
+            fig4.suptitle("h(t) = 1 - 2*|t| in (|t| < 0.5) with Periodic time (T = 6)", fontsize=16)
+
+            plotnum = 311
+            plt.subplot(plotnum)
+            plt.title("h(t) in Time Domain")
+            plt.xlabel('')
+            plt.ylabel('h(t)')
+            plt.xticks(np.arange(min(rng), max(rng), 1.0))
+            h = D.h(rng)
+            plt.plot(rng, h)
+
+            plotnum += 1
+            plt.subplot(plotnum)
+            plt.title("Fourier Series Coefficients Magnitudes of h(t)")
+            plt.xlabel('')
+            plt.ylabel('|ak|')
+            #plt.xticks(np.arange(min(rng), max(rng), 1.0))
+            fourierCoeff = D.fourierSeries(D.h(rng), 20)
+
+            mags = np.sqrt(fourierCoeff[:, 0] ** 2 + fourierCoeff[:, 1] ** 2)
+
+            plt.plot(range(-20, 21), mags)
+
+            plotnum += 1
+            plt.subplot(plotnum)
+            plt.title("Fourier Series Coefficients Phase of h(t)")
+            plt.xlabel('k')
+            plt.ylabel('<ak')
+            plt.xticks(np.arange(min(rng), max(rng), 1.0))
+            phase = np.angle(fourierCoeff)
+            plt.plot(rng, 0*rng)
+
+            pdf.savefig(fig4)
+            pdf.close()
+            break
 
         elif mode == 'E':
             outPdf = "Part E.pdf"
+            pdf = matplotlib.backends.backend_pdf.PdfPages(outPdf)
+            rng = np.arange(-15., 15.1, 0.05)
+            fig4 = plt.figure(1, figsize=(20, 10))
+            plotnum = 221
 
+            plt.subplot(plotnum)
+            m = E.m(rng)
+            plt.ylabel('m(t)')
+            plt.xlabel('t')
+            plt.title('m(t) = sin(5πt)/πt')
+            plt.xticks(np.arange(min(rng), max(rng), 1.0))
+            plt.plot(rng, m)
+
+            plotnum += 1
+            plt.subplot(plotnum)
+            r = E.r(rng)
+            plt.ylabel('r(t)')
+            plt.xlabel('t')
+            plt.title('r(t) = m(t) * cos(30πt)')
+            plt.xticks(np.arange(min(rng), max(rng), 1.0))
+            plt.plot(rng, r)
+
+            plotnum += 1
+            plt.subplot(plotnum)
+            m = E.m(rng)
+            fourierTransM = np.fft.fft(m)
+            plt.ylabel('M(jf)')
+            plt.xlabel('f')
+            plt.title('Fourier Transform of m(t)')
+            plt.xticks(np.arange(min(rng), max(rng), 1.0))
+            plt.plot(rng, np.abs(fourierTransM))
+
+            plotnum += 1
+            plt.subplot(plotnum)
+            fourierTransR = np.fft.fft(r)
+            plt.ylabel('R(jf)')
+            plt.xlabel('f')
+            plt.title('Fourier Transform of r(t)')
+            plt.xticks(np.arange(min(rng), max(rng), 1.0))
+            plt.plot(rng, np.abs(fourierTransR))
+
+            pdf.savefig(fig4)
+            pdf.close()
+            break
 
         elif mode == 'Q':
             break
